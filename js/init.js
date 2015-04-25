@@ -5,7 +5,10 @@
 */
 
 (function($) {
-
+	
+	
+	
+	
 	skel.init({
 		reset: 'full',
 		breakpoints: {
@@ -65,7 +68,7 @@
 	});
 
 	$(function() {
-
+		
 		var	$window = $(window),
 			$body = $('body'),
 			$header = $('#header'),
@@ -127,7 +130,9 @@
 				});
 
 			}
-
+		
 	});
+	
+	
 
 })(jQuery);
