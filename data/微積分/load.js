@@ -4,7 +4,7 @@ data[1]=[102,1,2,1];
 data[2]=[103,0,1,1];
 data[3]=[103,1,1,1];
 data[4]=[104,0,1,3];
-
+var mF = 0,nF = 0;
 var index = data.length-1;			
 var subject = "微積分";
 
@@ -18,30 +18,62 @@ skel.on('change', function() {
 
 function Load(){
 	
-	//alert(skel.vars.stateId);
-	/*
-	if (skel.isActive('global') || skel.isActive('wide') || skel.isActive('normal') || skel.isActive('narrow'))
+	if (skel.isActive('narrower'))
 	{
-		alert('big');
+		$('.toggle').bind('touchend',chnF);
+		$('.toggle').bind('click',chnF);
+		function chnF(){
+			if(nF == 0){
+				nF = 1; 
+				addThing();
+			}
+		}
+		function addThing(){
+			$(nav).ready(function() {
+			var nav = $('[data-action="navList"]>nav');
+			nav.append('<a class="link depth-1" href="javascript:ChangeYear(2)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>yyyy</a>');
+			
+			});
+		}
 	}
-	else *if (skel.isActive('narrower')){
-		//alert('m');
-	}
-	else if (skel.isActive('mobile'))
+	else if(skel.isActive('mobile'))
 	{
-		alert('small');
+		$('.toggle').bind('touchend',chmF);
+		$('.toggle').bind('click',chmF);
+		function chmF(){
+			if(mF == 0){
+				mF = 1; 
+				addThing();
+			}
+		}
+		
+		function addThing(){
+			
+			$(nav).ready(function() {
+			
+			var nav = $('[data-action="navList"]>nav');
+				
+			nav.append('<a class="link depth-1" href="javascript:ChangeYear(2)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>yyyy</a>');
+			
+			});
+		}
 	}
-*/
-	var StyleHead = '<li style="white-space: nowrap;"><a href="javascript:ChangeYear(';
-	var StyleMiddle = ')" style="display: block;">';
-	var StyleFoot = '</a></li>';
-	$(".y").empty(); //清空menu內容
+	else
+	{
+		
+		var StyleHead = '<li style="white-space: nowrap;"><a href="javascript:ChangeYear(';
+		var StyleMiddle = ')" style="display: block;">';
+		var StyleFoot = '</a></li>';
+		$(".y").empty(); //清空menu內容
 	
-	for(var i =0; i < data.length; i++)
-	{
-		var str = StyleHead + i + StyleMiddle + data[i][0] + Se(data[i][1]) + Ti(data[i][2]) + StyleFoot;
-		$(".y").append(str);
+		for(var i =0; i < data.length; i++)
+		{
+			var str = StyleHead + i + StyleMiddle + data[i][0] + Se(data[i][1]) + Ti(data[i][2]) + StyleFoot;
+			$(".y").append(str);
+		}
+		
 	}
+	
 	show();	
 }
 
