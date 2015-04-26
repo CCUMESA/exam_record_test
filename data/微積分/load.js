@@ -22,61 +22,46 @@ function Load(){
 	{
 		$('.toggle').bind('touchend',chnF);
 		$('.toggle').bind('click',chnF);
-		function chnF(){
-			if(nF == 0){
-				nF = 1; 
-				addThing();
-			}
-		}
-		function addThing(){
-			$(nav).ready(function() {
-			var nav = $('[data-action="navList"]>nav');
-			nav.append('<a class="link depth-1" href="javascript:ChangeYear(2)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>yyyy</a>');
-			
-			});
-		}
+		function chnF(){if(nF == 0){nF = 1;addThingM();}}
 	}
 	else if(skel.isActive('mobile'))
 	{
 		$('.toggle').bind('touchend',chmF);
 		$('.toggle').bind('click',chmF);
-		function chmF(){
-			if(mF == 0){
-				mF = 1; 
-				addThing();
-			}
-		}
-		
-		function addThing(){
-			
-			$(nav).ready(function() {
-			
-			var nav = $('[data-action="navList"]>nav');
-				
-			nav.append('<a class="link depth-1" href="javascript:ChangeYear(2)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>yyyy</a>');
-			
-			});
+		function chmF(){if(mF == 0){mF = 1; addThingM();}
 		}
 	}
 	else
-	{
-		
-		var StyleHead = '<li style="white-space: nowrap;"><a href="javascript:ChangeYear(';
-		var StyleMiddle = ')" style="display: block;">';
-		var StyleFoot = '</a></li>';
-		$(".y").empty(); //清空menu內容
-	
-		for(var i =0; i < data.length; i++)
-		{
-			var str = StyleHead + i + StyleMiddle + data[i][0] + Se(data[i][1]) + Ti(data[i][2]) + StyleFoot;
-			$(".y").append(str);
-		}
-		
-	}
+		addThingW();
 	
 	show();	
 }
 
+function addThingM(){
+	$(nav).ready(function() {
+		var StyleHead = '<a class="link depth-1" href="javascript:ChangeYear(';
+		var StyleMiddle = ')" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>';
+		var nav = $('[data-action="navList"]>nav>[href="##"]');
+		for (var i =data.length -1; i >=0 ; i--)
+		{
+			nav.after(StyleHead + i + StyleMiddle + data[i][0] + Se(data[i][1]) + Ti(data[i][2]) +  '</a>');
+		}
+	});
+}
+
+function addThingW(){
+
+	var StyleHead = '<li style="white-space: nowrap;"><a href="javascript:ChangeYear(';
+	var StyleMiddle = ')" style="display: block;">';
+	var StyleFoot = '</a></li>';
+	$(".y").empty(); //清空menu內容
+	
+	for(var i =0; i < data.length; i++)
+	{
+		var str = StyleHead + i + StyleMiddle + data[i][0] + Se(data[i][1]) + Ti(data[i][2]) + StyleFoot;
+		$(".y").append(str);
+	}
+}
 function ChangeYear(i){
 	index = i;
 	show()
